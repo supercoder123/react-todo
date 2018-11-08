@@ -1,14 +1,28 @@
 import React from "react";
 import InputBox from "./InputBox";
-import AddButton from "./AddButton";
+import { Button, Input } from "reactstrap";
 
 const Form = props => {
+  let input;
   return (
     <div className="form">
-      <InputBox placeholder="Search" />
       <div className="todoDiv">
-        <InputBox placeholder="What is your task?" />
-        <AddButton color="primary" buttonText="Add Item" />
+        <Input
+          placeholder="What is your task?"
+          name="itemName"
+          innerRef={node => {
+            input = node;
+          }}
+        />
+        <Button
+          color="primary"
+          onClick={() => {
+            props.addItem(input.value);
+            console.log(input.value);
+            input.value = "";
+          }}>
+          Add Item
+        </Button>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Input } from "reactstrap";
 const InputBox = props => {
   return (
     <div>
-      <Input placeholder={props.placeholder} />
+      <Input placeholder={props.placeholder} name={props.itemName} />
     </div>
   );
 };
