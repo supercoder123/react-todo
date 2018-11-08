@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import InputBox from "./components/InputBox";
 import "./App.css";
 
 class App extends Component {
   render() {
-    return <div className="App">df</div>;
+    return (
+      <div className="App">
+        <InputBox placeholder="Search" />
+        <InputBox placeholder="What is your task?" />
+      </div>
+    );
   }
 }
 
