@@ -12,25 +12,39 @@ class App extends Component {
       items: []
     };
     this.addItem = this.addItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   addItem(item) {
-    let todoItem = {
-      id: id++,
-      text: item
-    };
-    this.state.items.push(todoItem);
+    if (!!item) {
+      let todoItem = {
+        id: id++,
+        text: item
+      };
+      this.state.items.push(todoItem);
+      this.setState({
+        items: this.state.items
+      });
+    }
+  }
+
+  removeItem(key) {
+    console.log("key", key);
+    let filteredArray = this.state.items.filter(x => x.id != key);
     this.setState({
-      items: this.state.items
+      items: filteredArray
     });
-    console.log("additem");
   }
 
   render() {
     return (
       <div>
         <Form addItem={this.addItem} />
-        <ListItems items={this.state.items} uniqueKey={id} />
+        <ListItems
+          items={this.state.items}
+          removeItem={this.removeItem}
+          uniqueKey={id}
+        />
       </div>
     );
   }

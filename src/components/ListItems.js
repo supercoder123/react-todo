@@ -3,11 +3,17 @@ import ListItem from "./ListItem";
 
 const ListItems = props => {
   return (
-    <ul>
+    <ol>
       {props.items.map(x => {
-        return <ListItem itemName={x.text} key={x.uniqueKey} />;
+        return (
+          <ListItem
+            removeItem={props.removeItem}
+            itemName={x.text}
+            keyProp={x.id}
+          />
+        );
       })}
-    </ul>
+    </ol>
   );
 };
 
