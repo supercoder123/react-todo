@@ -10,6 +10,7 @@ const Form = props => {
         placeholder="Search"
         onChange={e => {
           props.handleChange(e);
+          input.value = "";
         }}
       />
       <div className="todoDiv">
@@ -19,13 +20,18 @@ const Form = props => {
           innerRef={node => {
             input = node;
           }}
+          onKeyPress={e => {
+            if (e.charCode == 13) {
+              props.addItem(input.value);
+              input.value = "";
+            }
+          }}
         />
         <Button
           color="primary"
           onClick={() => {
             props.addItem(input.value);
             console.log(input.value);
-            input.value = "";
           }}
         >
           Add Item
