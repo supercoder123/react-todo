@@ -10,7 +10,6 @@ const Form = props => {
         placeholder="Search"
         onChange={e => {
           props.handleChange(e);
-          input.value = "";
         }}
       />
       <div className="todoDiv">
@@ -32,6 +31,7 @@ const Form = props => {
           onClick={() => {
             props.addItem(input.value);
             console.log(input.value);
+            input.value = "";
           }}
         >
           Add Item

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "./components/Form";
 import ListItems from "./components/ListItems";
+import uuid from "uuid/v1";
 import "./App.css";
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
       items: [],
       filteredList: []
     };
-    this.id = 0;
+    this.id = uuid();
     this.query = "";
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
@@ -22,12 +23,13 @@ class App extends Component {
   }
 
   addItem(item) {
+    console.log(uuid());
     if (!!item) {
       console.log("additem", item);
       this.setState(
         {
           item: {
-            id: this.id++,
+            id: uuid(),
             text: item
           }
         },
@@ -48,7 +50,7 @@ class App extends Component {
     this.setState({
       items: filteredArray
     });
-    this.id--;
+    //this.id--;
   }
 
   handleChange(e) {
@@ -57,13 +59,9 @@ class App extends Component {
     let ff = searchList.filter(x => {
       return x.text.includes(this.query);
     });
-
     this.setState({
       filteredList: ff
     });
-
-    // console.log("prevstate", this.state.items);
-    // console.log("change");
   }
 
   render() {
