@@ -6,6 +6,12 @@ const Form = props => {
   let input;
   return (
     <div className="form">
+      <Input
+        placeholder="Search"
+        onChange={e => {
+          props.handleChange(e);
+        }}
+      />
       <div className="todoDiv">
         <Input
           placeholder="What is your task?"
@@ -20,7 +26,8 @@ const Form = props => {
             props.addItem(input.value);
             console.log(input.value);
             input.value = "";
-          }}>
+          }}
+        >
           Add Item
         </Button>
       </div>

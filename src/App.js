@@ -3,28 +3,42 @@ import Form from "./components/Form";
 import ListItems from "./components/ListItems";
 import "./App.css";
 
-let id = 0;
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      item: {
+        id: 0,
+        text: ""
+      },
+      items: [],
+      filteredList: []
     };
+    this.id = 0;
+    this.query = "";
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   addItem(item) {
     if (!!item) {
-      let todoItem = {
-        id: id++,
-        text: item
-      };
-      this.state.items.push(todoItem);
-      this.setState({
-        items: this.state.items
-      });
+      console.log("additem", item);
+      this.setState(
+        {
+          item: {
+            id: this.id++,
+            text: item
+          }
+        },
+        function() {
+          this.state.items.push(this.state.item);
+          this.setState({
+            items: this.state.items
+          });
+        }
+      );
+      console.log(this.id);
     }
   }
 
@@ -34,16 +48,32 @@ class App extends Component {
     this.setState({
       items: filteredArray
     });
+    this.id--;
+  }
+
+  handleChange(e) {
+    this.query = e.target.value;
+    let searchList = this.state.items;
+    let ff = searchList.filter(x => {
+      return x.text.includes(this.query);
+    });
+
+    this.setState({
+      filteredList: ff
+    });
+
+    // console.log("prevstate", this.state.items);
+    // console.log("change");
   }
 
   render() {
     return (
       <div>
-        <Form addItem={this.addItem} />
+        <Form addItem={this.addItem} handleChange={this.handleChange} />
         <ListItems
-          items={this.state.items}
+          items={!this.query ? this.state.items : this.state.filteredList}
           removeItem={this.removeItem}
-          uniqueKey={id}
+          uniqueKey={this.id}
         />
       </div>
     );

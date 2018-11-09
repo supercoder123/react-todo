@@ -3,7 +3,7 @@ import ListItem from "./ListItem";
 
 const ListItems = props => {
   return (
-    <ol>
+    <ol className="form">
       {props.items.map(x => {
         return (
           <ListItem
