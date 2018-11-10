@@ -3,7 +3,7 @@ import { Input } from "reactstrap";
 
 const InputBox = props => {
   return (
-    <div>
+    <div className="task-input">
       <Input placeholder={props.placeholder} name={props.itemName} />
     </div>
   );

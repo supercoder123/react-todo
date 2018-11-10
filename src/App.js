@@ -61,10 +61,10 @@ class App extends Component {
 
   // function to handle change in filter input box
   handleChange(e) {
-    this.query = e.target.value;
+    this.query = e.target.value.toLowerCase();
     let searchList = this.state.items;
     let ff = searchList.filter(x => {
-      return x.text.includes(this.query);
+      return x.text.toLowerCase().includes(this.query);
     });
     this.setState({
       filteredList: ff

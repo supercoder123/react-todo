@@ -3,7 +3,7 @@ import ListItem from "./ListItem";
 
 const ListItems = props => {
   return (
-    <ol className="form">
+    <ul className="list-items">
       {props.items.map(x => {
         return (
           <ListItem
@@ -13,7 +13,7 @@ const ListItems = props => {
           />
         );
       })}
-    </ol>
+    </ul>
   );
 };
 

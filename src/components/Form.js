@@ -27,13 +27,13 @@ const Form = props => {
           }}
         />
         <Button
+          className="addItem"
           color="primary"
           onClick={() => {
             props.addItem(input.value);
             console.log(input.value);
             input.value = "";
-          }}
-        >
+          }}>
           Add Item
         </Button>
       </div>

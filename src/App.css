@@ -1,3 +1,9 @@
+body,
+html {
+  background-image: linear-gradient(180deg, #7f7fd5, #86a8e7, #91eae4);
+  background-repeat: no-repeat;
+  height: 100%;
+}
 .form {
   display: flex;
   justify-content: center;
@@ -9,6 +15,96 @@
 }
 .flex {
   display: flex;
+  justify-content: space-between;
 }
 .header {
+  margin: 10px;
+  background-color: white;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border-radius: 5px;
+  background-image: url(https://images.unsplash.com/photo-1541828985935-1fe979f9fc0b?ixlib=rb-0.3.5&s=0bdd8e02ba57b014de9494b6770633e8&auto=format&fit=crop&w=750&q=80);
+  box-shadow: 1px 2px 3px black;
+  color: white;
+  max-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header p {
+  margin-top: 0px;
+}
+
+.form > input {
+  border-radius: 20px;
+  padding: 10px;
+  border: 0;
+  outline: none;
+}
+
+.todoDiv input {
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  border: 0;
+  outline: none;
+}
+.addItem {
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: yellow;
+}
+
+.list-items {
+  list-style: none;
+  margin: 0 auto;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 5px;
+  max-width: 400px;
+  padding-left: 0;
+}
+
+.list-item {
+  padding-top: 10px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: white;
+  margin: 5px;
+  border-left: 4px solid transparent;
+  box-shadow: 1px 2px 2px grey;
+}
+
+.list-item li {
+  padding-left: 30px;
+  padding-top: 3px;
+}
+
+.remove-button {
+  margin-right: 15px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  border: 1px solid grey;
+  outline: none;
+}
+
+.remove-button:hover {
+  border-color: black;
+}
+.list-item:hover {
+  border-left: 4px solid blue;
+}
+
+.list-item input[type="checkbox"] {
+  margin-left: 15px;
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border: 0;
 }
