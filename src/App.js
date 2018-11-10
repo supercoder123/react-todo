@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "./components/Form";
 import ListItems from "./components/ListItems";
 import uuid from "uuid/v1";
+import Header from "./components/Header";
 import "./App.css";
 
 class App extends Component {
@@ -15,13 +16,17 @@ class App extends Component {
       items: [],
       filteredList: []
     };
+    // unique ids
     this.id = uuid();
+    // used for filtering
     this.query = "";
+    //Preserve this binding
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // function to add item
   addItem(item) {
     console.log(uuid());
     if (!!item) {
@@ -44,6 +49,7 @@ class App extends Component {
     }
   }
 
+  // function to remove item
   removeItem(key) {
     console.log("key", key);
     let filteredArray = this.state.items.filter(x => x.id != key);
@@ -53,6 +59,7 @@ class App extends Component {
     //this.id--;
   }
 
+  // function to handle change in filter input box
   handleChange(e) {
     this.query = e.target.value;
     let searchList = this.state.items;
@@ -67,6 +74,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header title="React Todo App" description="The Best Todo App " />
         <Form addItem={this.addItem} handleChange={this.handleChange} />
         <ListItems
           items={!this.query ? this.state.items : this.state.filteredList}

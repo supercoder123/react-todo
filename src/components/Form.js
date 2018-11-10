@@ -6,17 +6,17 @@ const Form = props => {
   let input;
   return (
     <div className="form">
-      <Input
+      <input
         placeholder="Search"
         onChange={e => {
           props.handleChange(e);
         }}
       />
       <div className="todoDiv">
-        <Input
+        <input
           placeholder="What is your task?"
           name="itemName"
-          innerRef={node => {
+          ref={node => {
             input = node;
           }}
           onKeyPress={e => {
