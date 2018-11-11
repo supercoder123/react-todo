@@ -10,6 +10,8 @@ const ListItems = props => {
             removeItem={props.removeItem}
             itemName={x.text}
             key={x.id}
+            handleChecked={props.handleChecked}
+            checked={x.checked}
             uniqueKey={x.id}
           />
         );

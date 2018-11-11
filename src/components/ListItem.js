@@ -4,7 +4,7 @@ class ListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false,
+      checked: this.props.checked,
       key: this.props.uniqueKey
     };
   }
@@ -13,11 +13,11 @@ class ListItem extends Component {
     console.log("unmount");
   }
 
-  handleCheck() {
-    this.setState({
-      checked: !this.state.checked
-    });
-  }
+  // handleCheck() {
+  //   this.setState({
+  //     checked: !this.state.checked
+  //   });
+  // }
 
   render() {
     return (
@@ -25,11 +25,12 @@ class ListItem extends Component {
         <input
           type="checkbox"
           onClick={() => {
-            this.handleCheck();
+            this.props.handleChecked(this.state.key);
           }}
+          checked={this.props.checked}
         />
         <li>
-          {!this.state.checked && this.state.key === this.props.uniqueKey ? (
+          {!this.props.checked && this.state.key === this.props.uniqueKey ? (
             this.props.itemName
           ) : (
             <strike>{this.props.itemName}</strike>

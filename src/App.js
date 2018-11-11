@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       item: {
         id: 0,
-        text: ""
+        text: "",
+        checked: false
       },
       items: [],
       filteredList: []
@@ -24,6 +25,7 @@ class App extends Component {
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChecked = this.handleChecked.bind(this);
   }
 
   // function to add item
@@ -35,7 +37,8 @@ class App extends Component {
         {
           item: {
             id: uuid(),
-            text: item
+            text: item,
+            checked: false
           }
         },
         function() {
@@ -52,10 +55,23 @@ class App extends Component {
   // function to remove item
   removeItem(key) {
     console.log("key", key);
-    let filteredArray = this.state.items.filter(x => x.id != key);
-    this.setState({
-      items: filteredArray
-    });
+    if (!this.query) {
+      let filteredArray = this.state.items.filter(x => x.id != key);
+      this.setState({
+        items: filteredArray
+      });
+    } else {
+      let filteredArray = this.state.items.filter(x => x.id != key);
+      this.setState({
+        items: filteredArray
+      });
+
+      let filterList = this.state.filteredList.filter(x => x.id != key);
+      this.setState({
+        filteredList: filterList
+      });
+    }
+
     //this.id--;
   }
 
@@ -72,14 +88,35 @@ class App extends Component {
     });
   }
 
+  handleChecked(key) {
+    let checkedItem = this.state.items.find(x => {
+      return x.id === key;
+    });
+    console.log("checkedItem", checkedItem);
+    let index = this.state.items.indexOf(checkedItem);
+    checkedItem.checked = !checkedItem.checked;
+    this.setState(
+      {
+        item: checkedItem
+      },
+      () => {
+        let newList = this.state.items;
+        newList[index] = checkedItem;
+        this.setState({
+          items: newList
+        });
+      }
+    );
+  }
+
   render() {
     return (
       <div>
-        <Header title="React Todo App" description="The Best Todo App " />
         <Form addItem={this.addItem} handleChange={this.handleChange} />
         <ListItems
           items={!this.query ? this.state.items : this.state.filteredList}
           removeItem={this.removeItem}
+          handleChecked={this.handleChecked}
           uniqueKey={this.state.item.id}
         />
       </div>
