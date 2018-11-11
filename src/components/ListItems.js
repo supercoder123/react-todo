@@ -9,7 +9,8 @@ const ListItems = props => {
           <ListItem
             removeItem={props.removeItem}
             itemName={x.text}
-            keyProp={x.id}
+            key={x.id}
+            uniqueKey={x.id}
           />
         );
       })}

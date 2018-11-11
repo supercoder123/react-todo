@@ -61,6 +61,7 @@ class App extends Component {
 
   // function to handle change in filter input box
   handleChange(e) {
+    console.log(e.target.value);
     this.query = e.target.value.toLowerCase();
     let searchList = this.state.items;
     let ff = searchList.filter(x => {
@@ -79,7 +80,7 @@ class App extends Component {
         <ListItems
           items={!this.query ? this.state.items : this.state.filteredList}
           removeItem={this.removeItem}
-          uniqueKey={this.id}
+          uniqueKey={this.state.item.id}
         />
       </div>
     );

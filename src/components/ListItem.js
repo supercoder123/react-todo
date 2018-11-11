@@ -4,8 +4,13 @@ class ListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: false,
+      key: this.props.uniqueKey
     };
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
   }
 
   handleCheck() {
@@ -23,8 +28,8 @@ class ListItem extends Component {
             this.handleCheck();
           }}
         />
-        <li key={this.props.keyProp}>
-          {!this.state.checked ? (
+        <li>
+          {!this.state.checked && this.state.key === this.props.uniqueKey ? (
             this.props.itemName
           ) : (
             <strike>{this.props.itemName}</strike>
@@ -33,7 +38,7 @@ class ListItem extends Component {
         <button
           className="remove-button"
           onClick={() => {
-            this.props.removeItem(this.props.keyProp);
+            this.props.removeItem(this.props.uniqueKey);
           }}>
           X
         </button>
