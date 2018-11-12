@@ -1,6 +1,6 @@
 import React from "react";
 import InputBox from "./InputBox";
-import { Button, Input } from "reactstrap";
+import { FaTrash } from "react-icons/fa";
 
 const Form = props => {
   let input;
@@ -13,29 +13,50 @@ const Form = props => {
         }}
       />
       <div className="todoDiv">
-        <input
-          placeholder="What is your task?"
-          name="itemName"
-          ref={node => {
-            input = node;
+        <button
+          className="trash"
+          onClick={() => {
+            props.deleteAll();
           }}
-          onKeyPress={e => {
-            if (e.charCode == 13) {
-              props.addItem(input.value);
-              input.value = "";
-            }
+        >
+          <FaTrash />
+        </button>
+        <input
+          type="checkbox"
+          title="Select All"
+          checked={props.checkedAll ? true : false}
+          onClick={() => {
+            props.selectAll();
+            console.log("select ALL");
           }}
         />
-        <Button
-          className="addItem"
-          color="primary"
-          onClick={() => {
-            props.addItem(input.value);
-            console.log(input.value);
-            input.value = "";
-          }}>
-          Add Item
-        </Button>
+        <div>
+          <input
+            type="text"
+            placeholder="What is your task?"
+            name="itemName"
+            ref={node => {
+              input = node;
+            }}
+            onKeyPress={e => {
+              if (e.charCode == 13) {
+                props.addItem(input.value);
+                input.value = "";
+              }
+            }}
+          />
+          <button
+            className="addItem"
+            color="primary"
+            onClick={() => {
+              props.addItem(input.value);
+              console.log(input.value);
+              input.value = "";
+            }}
+          >
+            Add Item
+          </button>
+        </div>
       </div>
     </div>
   );

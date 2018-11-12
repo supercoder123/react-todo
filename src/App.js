@@ -21,11 +21,16 @@ class App extends Component {
     this.id = uuid();
     // used for filtering
     this.query = "";
+    //checked flag
+    this.checkedAll = false;
+
     //Preserve this binding
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChecked = this.handleChecked.bind(this);
+    this.selectAll = this.selectAll.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
   }
 
   // function to add item
@@ -52,24 +57,27 @@ class App extends Component {
     }
   }
 
-  // function to remove item
-  removeItem(key) {
-    console.log("key", key);
-    if (!this.query) {
-      let filteredArray = this.state.items.filter(x => x.id != key);
+  itemRemover(key, list, num) {
+    let filteredArray = list.filter(x => x.id != key);
+    if (num === 0) {
       this.setState({
         items: filteredArray
       });
     } else {
-      let filteredArray = this.state.items.filter(x => x.id != key);
       this.setState({
-        items: filteredArray
+        filteredList: filteredArray
       });
+    }
+  }
 
-      let filterList = this.state.filteredList.filter(x => x.id != key);
-      this.setState({
-        filteredList: filterList
-      });
+  // function to remove item
+  removeItem(key) {
+    console.log("key", key);
+    if (!this.query) {
+      this.itemRemover(key, this.state.items, 0);
+    } else {
+      this.itemRemover(key, this.state.items, 0);
+      this.itemRemover(key, this.state.filteredList, 1);
     }
 
     //this.id--;
@@ -109,10 +117,47 @@ class App extends Component {
     );
   }
 
+  selectAll() {
+    if (this.state.items !== 0) {
+      // this.state.checkedAll = !this.state.checkedAll;
+      this.checkedAll = !this.checkedAll;
+      let checkedList = this.state.items.map(x => {
+        x.checked = this.checkedAll;
+        return x;
+      });
+      console.log(checkedList);
+      this.setState({
+        items: checkedList
+      });
+      console.log(this.checkedAll);
+    }
+  }
+
+  deleteAll() {
+    let deletedList = this.state.items.filter(x => {
+      return x.checked === false;
+    });
+    this.setState({
+      items: deletedList
+    });
+    this.setState({
+      checkedAll: false
+    });
+    this.checkedAll = false;
+    console.log(this.checkedAll);
+  }
+
   render() {
     return (
       <div>
-        <Form addItem={this.addItem} handleChange={this.handleChange} />
+        <Form
+          items={this.state.items}
+          checkedAll={this.checkedAll}
+          addItem={this.addItem}
+          handleChange={this.handleChange}
+          selectAll={this.selectAll}
+          deleteAll={this.deleteAll}
+        />
         <ListItems
           items={!this.query ? this.state.items : this.state.filteredList}
           removeItem={this.removeItem}

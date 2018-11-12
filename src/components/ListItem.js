@@ -9,10 +9,6 @@ class ListItem extends Component {
     };
   }
 
-  componentWillUnmount() {
-    console.log("unmount");
-  }
-
   // handleCheck() {
   //   this.setState({
   //     checked: !this.state.checked

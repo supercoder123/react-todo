@@ -6,6 +6,7 @@
     "bootstrap": "latest",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
+    "react-icons": "3.2.2",
     "react-scripts": "2.1.1",
     "reactstrap": "6.5.0",
     "uuid": "3.3.2"
@@ -19,5 +20,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
